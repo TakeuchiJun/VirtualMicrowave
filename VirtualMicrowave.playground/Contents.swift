@@ -1,5 +1,5 @@
 import UIKit
-
+// 注釈を追加
 //class VirtualMicrowave {
     
     // ワット数
