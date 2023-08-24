@@ -8,14 +8,15 @@ class VirtualMicrowave {
         case power500W
     }
     
+    //変数初期値
     var warmingTime : Int = 10 //分
     var warmingStopOperation = false
     var wattType: String = "500W"
 
-    //温めワット数、温め時間カウントダウン
+    //時間制限処理、温めワット数、温め時間カウントダウン
     func start(wattBottun: WattBottunType){
         guard warmingTime < 21 else {
-            print("温め時間は20分までです。設定し直してください。")
+            print("温め時間エラー[設定可能範囲：1〜20(分)]")
             return
         }
         
@@ -42,9 +43,4 @@ class VirtualMicrowave {
 let controller = VirtualMicrowave()
 controller.warmingTime = 20
 controller.start(wattBottun: .power600W)
-
-
-
-
-
 
