@@ -27,8 +27,10 @@ class VirtualMicrowave {
         case .power500W:
             wattType = "500W"
         }
+        //液晶表示部（温め開始）
         print("温め開始：\(wattType)で\(warmingTime)分温めます。")
         
+        //液晶表示部（残時間、終了）
         while !warmingStopOperation {
             print("残り時間:\(warmingTime)分")
             warmingTime -= 1
