@@ -13,8 +13,9 @@ class VirtualMicrowave {
     var warmingStopOperation = false
     var wattType: String = "500W"
 
-    //時間制限処理、温めワット数、温め時間カウントダウン
+    //イレギュラー処理、温めワット数、温め時間カウントダウン
     func start(wattBottun: WattBottunType){
+        //イレギュラー処理(時間制限）
         guard warmingTime < 21, warmingTime > 0 else {
             print("温め時間エラー[設定可能範囲：1〜20(分)]")
             return
