@@ -1,4 +1,8 @@
 import UIKit
+import Foundation
+import PlaygroundSupport
+
+PlaygroundPage.current.needsIndefiniteExecution = true
 
 class VirtualMicrowave {
     
@@ -12,6 +16,8 @@ class VirtualMicrowave {
     var warmingTime : Int = 10 //分
     var warmingStopOperation = false
     var wattType: String = "500W"
+    var timer: Timer?
+    var count: Int = 0
 
     //イレギュラー処理、温めワット数、温め時間カウントダウン
     func start(wattBottun: WattBottunType){
@@ -27,23 +33,34 @@ class VirtualMicrowave {
         case .power500W:
             wattType = "500W"
         }
+
         //液晶表示部（温め開始）
         print("温め開始：\(wattType)で\(warmingTime)分温めます。")
         
-        //液晶表示部（残時間、終了）
-        while !warmingStopOperation {
-            print("残り時間:\(warmingTime)分")
-            warmingTime -= 1
-            if warmingTime < 1 {
-                warmingStopOperation = true
-                }
-            }
-        print("- 温め終了 -")
+        //タイマーセット
+        timer = Timer.scheduledTimer(
+            timeInterval: 1,//（秒）
+            target: self,
+            selector: #selector(countup),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+        
+    @objc func countup(){
+        count += 1
+        if warmingTime <= count {
+            print("- 温め終了 -")
+            timer?.invalidate()
+        } else {
+            var remaingTime = warmingTime - count
+            print("残り\(remaingTime)分です。")
         }
-   }
+    }
+}
 
 //電子レンジ操作
 let controller = VirtualMicrowave()
-controller.warmingTime = 20
-controller.start(wattBottun: .power600W)
+controller.warmingTime = 5
+controller.start(wattBottun: .power500W)
 
