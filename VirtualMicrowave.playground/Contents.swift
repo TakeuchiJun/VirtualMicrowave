@@ -41,13 +41,13 @@ class VirtualMicrowave {
         timer = Timer.scheduledTimer(
             timeInterval: 1,//（秒）
             target: self,
-            selector: #selector(countup),
+            selector: #selector(countDown),
             userInfo: nil,
             repeats: true
         )
     }
         
-    @objc func countup(){
+    @objc func countDown(){
         count += 1
         if warmingTime <= count {
             print("- 温め終了 -")
